@@ -43,7 +43,7 @@ They did an awesome job within the short amount of time they had. So many thanks
   - upon death, select what type of character the player was - e.g. villager, werewolf, seer, witch, etc
 
 ## Set-up
-Make sure to also run the api [heen-en-weerwolven-react](https://github.com/tanjahennis/heen-en-weerwolven-react)
+Make sure to also run [heen-en-weerwolven-react](https://github.com/tanjahennis/heen-en-weerwolven-react)
 
 Start server
 ```yarn start```
