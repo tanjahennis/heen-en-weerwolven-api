@@ -1,45 +1,49 @@
-# Express Games API
+## Heen en Weerwolven
 
-RESTful Express API for Games on top of MongoDB.
+Heen en Weerwolven is an app designed to support the game Werewolves when playing with two villages. In short - Werewolves is a live action role playing game where the villagers of a previously peaceful village try to unmask the werewolves that are suddenly in their midst and keep eating innocent people at night.
 
-## Authentication
+Playing the game with two villages gives players the opportunity to travel between the different locations, allowing them to share information they learned in their own village. For example accusing someone of being a werewolf and explain why you think this. Or approaching it a bit more low-key, you could send a secret message to one of your fellow players. Either signed or anonymous, within your village or to the other one.
 
-Create a User with the following attributes:
+This web app is not a standalone replacement of the game, its purpose is to enhance the experience of playing Werewolves together in real life. Enjoying an exciting game of secrecy, accusation, defence, magic and mystery.
 
-| Attribute | Type   | Description   |
-|-----------|--------|---------------|
-| name      | string | Full name     |
-| email     | string | Email address |
-| password  | string | Password      |
+The first version of the app was developed by a team of graduates from Class14 at Codaisseur. After finishing their training as full stack developers, their Final Real World Project was getting the idea for the app into the real world to be actually used by me and my friends and hopefully many more!
 
-Use the following endpoints to deal with initial authentication and the user.
+They did an awesome job within the short amount of time they had. So many thanks and credits to them for getting Version 1.0 up and running:
 
-| HTTP Verb | Path        | Description |
-|-----------|-------------|--------------|
-| `POST`    | `/users`    | Create a user account |
-| `POST`    | `/sessions` | Log in with email and password, and retrieve a JWT token |
-| `GET`     | `/users/me` | Retrieve own user data |
+[Nayhane Gomes](https://github.com/Nayhane), [Anissa Miloudi](https://github.com/AMiloudi), [Erle Monfils](https://github.com/Erlemorgaine), [Oscar van Zijverden](https://github.com/Schmarfy), [Caspar Boetes](https://github.com/Casparboetes)
 
-To authorize further requests, use Bearer authentication with the provided JWT token:
+## Current main features:
+**sign-up**
+  - webcam image
+  - equal distribution between villages
 
-```
-Authorization: Bearer <token here>
-```
+**players**
+  - send message
+  - move to other village
+  - mayor-role
+  - die..
 
-_**Note**: See `db/seed.js` for an example._
+**messages**
+  - player can send one message per game, receive as many as sent
+  - ten second countdown to send message before it gets automatically sent
+  - option to sign or send anonymous
+  - storyteller can show messages to recipients from message page
 
-## Games
+**travel**
+  - move between villages
+  - when percentage of originally registered players drops to 50% you get prompted to move all villagers to one village
+  - move all villagers with one button
 
-**Note:** See `models/game.js` for the Game schema attributes.
+**timer**
+  - upon daybreak a timer is manually started at 15 minutes to discuss and accuse
+  - five minutes before it ends it indicates they have a few more minutes left to give their final defence and vote who will die
 
-| HTTP Verb | Path | Description |
-|-----------|------|--------------|
-| `GET` | `/games` | Retrieve all games |
-| `POST` | `/games` | Create a game* |
-| `GET` | `/games/:id` | Retrieve a single game by it's `id` |
-| `PUT` | `/games/:id` | Update a game with a specific `id`* |
-| `PATCH` | `/games/:id` | Patch (partial update) a game with a specific `id`* |
-| `DELETE` | `/games/:id` | Destroy a single game by it's `id`* |
-| | | _* Needs authentication_ |
+## Upcoming features:
+**characters**
+  - upon death, select what type of character the player was - e.g. villager, werewolf, seer, witch, etc
 
-_**Note**: Run `yarn run seed` to seed some initial games._
+## Set-up
+Make sure to also run the api [heen-en-weerwolven-react](https://github.com/tanjahennis/heen-en-weerwolven-react)
+
+Start server
+```yarn start```
