@@ -74,7 +74,8 @@ module.exports = io => {
         photo: req.body.photo,
         village: [{name: newVillage}],
         //receivedMessages: req.body.receivedMessages
-        receivedMessages: []
+        receivedMessages: [],
+        character: req.body.character,
       }
 
       Player.create(newPlayer)
@@ -117,7 +118,7 @@ module.exports = io => {
         .then((player) => {
           if (!player) { return next() }
 
-          let updatedPlayer = {...player, dead: req.body.dead, mayor: req.body.mayor }
+          let updatedPlayer = {...player, dead: req.body.dead, mayor: req.body.mayor, character: req.body.character }
 
           Player.findByIdAndUpdate(id, { $set: updatedPlayer }, { new: true })
             .then((player) => {
@@ -292,6 +293,27 @@ module.exports = io => {
             message: 'Removed',
             _id: id
           })
+        })
+        .catch((error) => next(error))
+    })
+    .patch('/players/:id/character', authenticate, (req, res, next) => {
+      const id = req.params.id
+
+      Player.findById(id)
+        .then((player) => {
+          if (!player) { return next() }
+
+        let updatedPlayer = {...player, character: req.body.character}
+
+        Player.findByIdAndUpdate(id, { $set: updatedPlayer }, { new: true })
+          .then((player) => {
+            io.emit('action', {
+              type: 'PLAYER_UPDATED',
+              payload: player
+            })
+            res.json(player)
+          })
+          .catch((error) => next(error))
         })
         .catch((error) => next(error))
     })
